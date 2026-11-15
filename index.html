@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f2e9">
+<title>Osaka Interactive Map 2026</title>
+<style>
+:root{color-scheme:light;--ink:#202923;--soft:#515d54;--paper:#f6f2e9;--line:#ded9cc;--accent:#a03030}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}a{color:#205d50;text-underline-offset:3px}button{font:inherit;cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,#map:focus-visible{outline:3px solid #186c99;outline-offset:3px}
+main{width:min(1420px,100%);margin:auto;padding:24px clamp(16px,4vw,56px) 36px}.header{display:flex;justify-content:space-between;align-items:end;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--line)}h1,h2,p{margin:0}h1{font:700 clamp(2rem,5.5vw,4.7rem)/1 Georgia,serif;letter-spacing:-.045em}h2{font-size:1.35rem;line-height:1.3}.eyebrow{color:#914434;font-weight:750;letter-spacing:.09em;margin-bottom:9px}.header p:last-child{color:var(--soft);margin-top:9px}.header time{font-weight:700;white-space:nowrap}.layout{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:18px;margin-top:20px}.map-panel,.legend,.guide{background:#fffdf8;border:1px solid var(--line);border-radius:16px}.map-panel{overflow:hidden;min-width:0}.map-head{padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:space-between}.map-head button{background:#fffdf8;border:1px solid var(--line);border-radius:8px;padding:7px 10px;min-height:44px}.map-head button:disabled{cursor:default;color:#626862}#map{height:clamp(390px,59vh,660px);background:#e3ecdf;isolation:isolate}.map-error{padding:24px;max-width:420px}.caption{padding:9px 14px;font-size:.87rem;color:var(--soft)}.legend{padding:15px;align-self:start}.legend h2{margin-bottom:10px}fieldset{padding:0;border:0;margin:0;min-width:0}.day-choice{position:relative;display:block;margin:4px 0}.day-choice input{position:absolute;opacity:0;inset:0;margin:0;width:100%;height:100%;cursor:pointer}.day-choice span{display:flex;gap:10px;align-items:center;min-height:48px;border:1px solid transparent;border-radius:8px;padding:7px 9px}.day-choice input:checked+span{background:#f2eee4;border-color:#b4aa95;font-weight:750}.day-choice input:focus-visible+span{outline:3px solid #186c99}.swatch{width:12px;height:12px;flex:0 0 12px;background:var(--day);border-radius:50%}.key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.87rem}.dash{border-bottom:2px dashed #4d5b53;width:18px;display:inline-block;margin:0 4px 4px}.guide{margin-top:18px;padding:clamp(15px,3vw,25px);border-top:4px solid var(--accent)}.steps{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:1px}.steps li{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:10px;border-top:1px solid #e9e4d8;padding:12px 0}.step-icon{width:2rem;height:2rem;background:#f2eee4;border-radius:50%;display:grid;place-items:center}.steps p{color:var(--soft);margin-top:2px}.steps a{display:inline-block;margin-top:5px}.links{border-top:1px solid var(--line);padding-top:10px;font-size:.9rem}.links a{display:inline-block;margin:4px 14px 0 0}.pin{background:var(--pin);border:2px solid white;border-radius:50%;display:grid;place-items:center;box-shadow:0 1px 5px #0007;font-size:15px}
+@media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr);gap:10px}.legend{grid-row:1}.legend h2{font-size:1.05rem;margin-bottom:3px}fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 4px}.day-choice{margin:1px 0}.day-choice span{font-size:.84rem;padding-inline:6px;gap:6px}.key{margin-top:7px;padding-top:7px}#map{height:clamp(335px,54svh,535px)}.header{display:block}.header time{display:block;margin-top:8px}}
+#map canvas,.map-markers{position:absolute;inset:0;width:100%;height:100%}#map{position:relative;overflow:hidden}#map canvas{touch-action:none;cursor:grab}#map canvas:active{cursor:grabbing}.map-markers{pointer-events:none}.pin{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;text-decoration:none;pointer-events:auto}.pin[hidden]{display:none}.pin:hover,.pin:focus-visible{z-index:2}.pin-label{display:none;position:absolute;bottom:29px;left:50%;transform:translateX(-50%);padding:2px 5px;border-radius:4px;background:#fffdf8;color:#202923;font:600 11px system-ui,sans-serif;white-space:nowrap;box-shadow:0 1px 4px #0003}.pin:hover .pin-label,.pin:focus-visible .pin-label,.pin .principal{display:block}.map-zoom{display:grid;position:absolute;left:10px;top:10px;gap:3px}.map-zoom button{width:44px;height:44px;border:1px solid #817e70;border-radius:6px;background:#fffdf8;font-size:1.3rem}.attribution{position:absolute;right:0;bottom:0;background:#fffdf8;padding:2px 5px;font-size:.72rem}
+</style>
+</head>
+<body>
+<main>
+<header class="header"><div><p class="eyebrow">โอซาก้า · เกียวโต · อุจิ</p><h1>Osaka Interactive Map</h1><p>แผนเดินทาง 6 วันในคันไซ</p></div><time datetime="2026-11-19">19–24 พฤศจิกายน 2026</time></header>
+<div class="layout">
+<section class="map-panel" aria-labelledby="map-title">
+<div class="map-head"><h2 id="map-title">แผนที่เดินทาง</h2><button id="fit" type="button" disabled>ดูเส้นทางทั้งหมด</button></div>
+<div id="map" role="region" aria-label="แผนที่เส้นทางของวันที่เลือก"><p class="map-error">กำลังโหลดแผนที่…</p></div>
+<p class="caption">เส้นสีเชื่อมจุดตามลำดับการเดินทางโดยประมาณ กดหมุดหรือเปิด Google Maps ในแผนด้านล่างเพื่อดูเส้นทางจริง</p>
+</section>
+<aside class="legend" aria-labelledby="legend-title"><h2 id="legend-title">เลือกวันเดินทาง</h2><fieldset id="days" aria-label="วันเดินทาง"></fieldset><div class="key"><span>🚉 สถานี</span><span>⛩️ วัด</span><span>🏠 ย่านที่พัก</span><span>🎢 สวนสนุก</span><span>⛽ เติมน้ำมัน</span><span><i class="dash"></i>เดิน</span></div></aside>
+</div>
+<section class="guide" aria-labelledby="guide-title"><h2 id="guide-title" aria-live="polite"></h2><ol class="steps" id="steps"></ol><div class="links" id="links"></div></section>
+<noscript>โปรดเปิด JavaScript เพื่อเลือกวันเดินทางและดูแผนที่</noscript>
+</main>
+<script>
+const pin = (name, lat, lng, icon = '🚉', query = name) => ({name, coord:[lat,lng], icon, query});
+const points = {
+ base:pin('ย่านที่พัก Hanazonominami',34.6415,135.4982,'🏠','Hanazonominami Nishinari Osaka'),
+ hana:pin('Hanazonocho',34.6439,135.4966), tenga:pin('Tengachaya',34.6367,135.4969),
+ namba:pin('Namba · Yotsubashi',34.6665,135.4965,'🚉','Namba Station Osaka Metro Yotsubashi'),
+ osn:pin('Osaka-Namba · Hanshin',34.6672,135.4991),
+ umeda:pin('Nishi-Umeda',34.6995,135.4958), osaka:pin('JR Osaka',34.7025,135.4959),
+ kyoto:pin('JR Kyoto',34.9858,135.7588), kix:pin('Kansai Airport · KIX',34.4356,135.2433,'✈️'),
+ rental:pin('Toyota Rent a Car · KIX',34.4351,135.2451,'🚗','Toyota Rent a Car Kansai International Airport'),
+ katsuo:pin('Katsuo-ji',34.8665,135.4911,'⛩️'), minoh:pin('Minoh Falls',34.8538,135.4727,'🌿'),
+ fuel:pin('เติมน้ำมัน · ย่าน Namba',34.6567,135.4973,'⛽','gas station near Toyota Rent a Car Namba Terminal Osaka'),
+ toyota:pin('Toyota Rent a Car · Namba Terminal',34.6615,135.5013,'🚗','Toyota Rent a Car Namba Terminal Osaka'),
+ tof:pin('JR Tofukuji',34.9818,135.7690), toft:pin('Tofuku-ji',34.9762,135.7748,'⛩️'),
+ uji:pin('JR Uji',34.8905,135.8006), byodo:pin('Byodo-in',34.8893,135.8076,'⛩️'),
+ saga:pin('JR Saga-Arashiyama',35.0189,135.6810), bridge:pin('Togetsukyo',35.0120,135.6778,'🌉'),
+ arabica:pin('% Arabica Arashiyama',35.0126,135.6761,'☕'), tenryu:pin('Tenryu-ji',35.0159,135.6737,'⛩️'),
+ bamboo:pin('Arashiyama Bamboo Grove',35.0169,135.6713,'🎋'), joja:pin('Jojakko-ji',35.0191,135.6671,'⛩️'),
+ tsaga:pin('Torokko Saga',35.0184,135.6809), tarashi:pin('Torokko Arashiyama',35.0176,135.6688),
+ hozu:pin('Torokko Hozukyo',35.0228,135.6446), tkame:pin('Torokko Kameoka',35.0122,135.6060), uma:pin('JR Umahori',35.0108,135.6006),
+ eikan:pin('Eikando',35.0145,135.7958,'⛩️'), ponto:pin('Pontocho',35.0066,135.7706,'🍴'),
+ gion:pin('Gion · Hanamikoji',35.0027,135.7751,'📍'), kiyo:pin('Kiyomizu-dera',34.9949,135.7850,'⛩️'),
+ nishi:pin('Nishikujo',34.6828,135.4668), uni:pin('Universal City',34.6679,135.4387), usj:pin('Universal Studios Japan',34.6664,135.4323,'🎢'),
+ doton:pin('Dotonbori',34.6687,135.5012,'📍'), shinsa:pin('Shinsaibashi Shopping Street',34.6721,135.5013,'🛍️')
+};
+const metro='Osaka Metro Yotsubashi Line'; const jrKyoto='JR Kyoto Line'; const jrNara='JR Nara Line'; const jrSagano='JR Sagano Line'; const airport='Nankai Airport Express'; const walk='เดิน'; const taxi='แท็กซี่'; const drive='รถเช่า';
+const days = [
+ {date:19, week:'พฤหัสบดี', short:'คัตสึโอจิ', title:'คัตสึโอจิและน้ำตกมิโนะ', color:'#ad353c', focus:['katsuo','minoh'], steps:[
+ ['เดิน','kix rental','ถึง KIX ตามแผน 07:20 แล้วไปรับรถ Toyota ประมาณ 10:00'],
+ [drive,'rental katsuo minoh','เที่ยววัดดารุมะ Katsuo-ji ประมาณ 2 ชั่วโมง แล้วไปน้ำตก Minoh เผื่อเวลาเดินจากที่จอดรถ'],
+ [drive,'minoh base fuel toyota','แวะเช็กอินย่าน Hanazonominami เติมน้ำมันก่อนคืนรถที่ Toyota Namba Terminal ภายใน 20:00 จุดเติมน้ำมันเป็นพื้นที่ค้นหา เลือกปั๊มระหว่างทางตามสภาพจราจร'],
+ [walk,'toyota namba','เดินไปสถานี Osaka Metro Namba'],
+ [metro,'namba hana','ขึ้นขบวนไปทาง Suminoekoen แล้วลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']]},
+ {date:20, week:'ศุกร์', short:'โทฟุกุจิ · อุจิ', title:'โทฟุกุจิและอุจิ', color:'#9e540c', focus:['toft','byodo'], steps:[
+ [walk,'base hana','ออกจากที่พักประมาณ 07:00'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','เดินตามป้าย JR Osaka Station'],
+ [jrKyoto,'osaka kyoto','ขึ้นขบวนไป Kyoto แล้วออกไปจุดขึ้นแท็กซี่'],[taxi,'kyoto toft','ลงที่วัด Tofuku-ji'],[walk,'toft tof','เดินจากวัดไป JR Tofukuji'],
+ [jrNara,'tof uji','ขึ้นขบวนทาง Uji / Nara ตรวจป้ายว่าจอด JR Uji'],[walk,'uji byodo','เดินจาก JR Uji ไปวัด Byodo-in และถนนร้านชา'],
+ [walk,'byodo uji','กลับไป JR Uji'],[jrNara,'uji kyoto','นั่งกลับ Kyoto Station'],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']],
+ sources:[['Kyoto Travel','https://kyoto.travel/en/getting-around/getting-around-kyoto-by-subway-train/']]},
+ {date:21, week:'เสาร์', short:'อาราชิยามะ', title:'อาราชิยามะและรถไฟซากาโนะ', color:'#356649', focus:['bridge','bamboo','tsaga','tkame'], steps:[
+ [walk,'base hana','เดินไป Hanazonocho'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','ต่อไป JR Osaka'],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto'],
+ [jrSagano,'kyoto saga','ลง JR Saga-Arashiyama'],[walk,'saga bridge arabica tenryu bamboo joja tsaga','เที่ยวสะพาน Togetsukyo → % Arabica → Tenryu-ji → ป่าไผ่ แวะมื้อกลางวัน แล้วไป Jojakko-ji ก่อนกลับมาขึ้นรถไฟที่ Torokko Saga'],
+ ['Sagano Romantic Train','tsaga tarashi hozu tkame','ขึ้นที่ Torokko Saga เวลา 15:02 ตามแผน ลง Torokko Kameoka โดยสองสถานีกลางเป็นทางผ่าน'],
+ [walk,'tkame uma','เดินไป JR Umahori'],[jrSagano,'uma kyoto','ขึ้นทาง Kyoto'],[jrKyoto,'kyoto osaka','กลับโอซาก้า'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']],
+ sources:[['ตาราง Sagano Romantic Train','https://www.sagano-kanko.co.jp/en/train-info/']]},
+ {date:22, week:'อาทิตย์', short:'เอคันโด · กิออน', title:'เอคันโด กิออน และคิโยมิซุเดระ', color:'#654b96', focus:['eikan','gion','kiyo'], steps:[
+ [walk,'base hana','ออกจากที่พักประมาณ 07:00'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','เดินไป JR Osaka'],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto'],
+ [taxi,'kyoto eikan','ไป Eikando เป็นจุดแรกสำหรับชมใบไม้แดง'],[taxi,'eikan ponto','ต่อแท็กซี่ลงใกล้ Pontocho'],[walk,'ponto gion kiyo','เดินเที่ยว Pontocho และ Gion แล้วขึ้นไป Kiyomizu-dera ทางย่าน Higashiyama เผื่อเวลาทางลาดและคนหนาแน่น'],
+ [taxi,'kiyo kyoto','เรียกแท็กซี่จากถนนใหญ่ลง Kyoto Station'],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']]},
+ {date:23, week:'จันทร์', short:'USJ', title:'Universal Studios Japan เต็มวัน', color:'#22629d', focus:['nishi','uni','usj'], steps:[
+ [walk,'base hana','เดินไป Hanazonocho'],[metro,'hana namba','ขึ้นทาง Nishi-Umeda แล้วลง Namba'],[walk,'namba osn','เดินตามป้าย Hanshin ไป Osaka-Namba'],
+ ['Hanshin Namba Line','osn nishi','ขึ้นขบวนที่จอด Nishikujo'],['JR Yumesaki Line','nishi uni','เปลี่ยนไป JR Sakurajima Line หรือ Yumesaki Line ลง Universal City'],[walk,'uni usj','เดินผ่าน Universal CityWalk ไปทางเข้าสวนสนุก ช่วงเย็นกลับทางเดิม']],
+ sources:[['เส้นทางรถไฟของ USJ','https://www.usj.co.jp/web/en/us/access/train']]},
+ {date:24, week:'อังคาร', short:'ช้อปปิ้ง · KIX', title:'ช้อปปิ้งในนัมบะและเดินทางไป KIX', color:'#1b706c', focus:['doton','shinsa','kix'], steps:[
+ [walk,'base hana','เดินไป Hanazonocho หลังจัดการสัมภาระตามแผน'],[metro,'hana namba','ลง Namba'],
+ [walk,'namba doton shinsa namba','เที่ยว Dotonbori และ Shinsaibashi ตามเวลาที่มี แล้วกลับไป Osaka Metro Namba'],
+ [metro,'namba hana','ลง Hanazonocho เพื่อกลับไปรับสัมภาระ หากฝากไว้ที่ที่พัก'],[walk,'hana base tenga','รับสัมภาระแล้วเดินไป Nankai Tengachaya'],
+ [airport,'tenga kix','เลือกขบวนที่ปลายทาง Kansai Airport เผื่อเวลาเช็กอินตามตั๋วและตรวจอาคารผู้โดยสารก่อนออกเดินทาง']]}
+];
+const $ = id => document.getElementById(id);
+const add = (parent, tag, label, cls) => {
+ const node = document.createElement(tag);
+ if (label) node.textContent = label;
+ if (cls) node.className = cls;
+ parent.append(node);
+ return node;
+};
+function mapLink(keys, mode) {
+ const places = keys.map(key => points[key].query);
+ const params = new URLSearchParams({api:'1'});
+ if (places.length === 1) {
+   params.set('query',places[0]);
+   return 'https://www.google.com/maps/search/?'+params;
+ }
+ params.set('origin',places[0]); params.set('destination',places.at(-1));
+ params.set('travelmode',mode === walk ? 'walking' : [drive,taxi].includes(mode) ? 'driving' : 'transit');
+ if (places.length > 2) params.set('waypoints',places.slice(1,-1).join('|'));
+ return 'https://www.google.com/maps/dir/?'+params;
+}
+function link(parent, label, url) {
+ const item = add(parent,'a',label);
+ item.href=url; item.target='_blank'; item.rel='noopener noreferrer';
+ return item;
+}
+let current=0;
+let map, controls;
+const keyList = step => step[1].split(' ');
+function select(index) {
+ current=index;
+ const day=days[index];
+ controls[index].checked=true;
+ document.documentElement.style.setProperty('--accent',day.color);
+ $('guide-title').textContent=day.week+' '+day.date+' พ.ย. · '+day.title;
+ $('steps').replaceChildren();
+ day.steps.forEach(step=>{
+  const [mode,,description]=step;
+  const keys=keyList(step);
+  const item=add($('steps'),'li');
+  const icon=add(item,'span',mode===walk?'🚶':mode===taxi?'🚕':mode===drive?'🚗':'🚉','step-icon');
+  icon.setAttribute('aria-hidden','true');
+  const copy=add(item,'div');
+  add(copy,'strong',mode+' · '+points[keys[0]].name+' → '+points[keys.at(-1)].name);
+  add(copy,'p',description);
+  // Separate long walks and named scenic trains into links Google Maps can resolve reliably.
+  if (keys.length>5 || mode==='Sagano Romantic Train') {
+   keys.forEach((key,i)=>{
+    if (i) copy.append(document.createTextNode(' · '));
+    link(copy,points[key].name,mapLink([key]));
+   });
+  } else {
+   link(copy,'เปิดใน Google Maps ↗',mapLink(keys,mode));
+  }
+ });
+ $('links').replaceChildren();
+ link($('links'),'แผนที่สถานี Hanazonocho','https://subway.osakametro.co.jp/en/station_guide/Y/y17/map.php');
+ for (const [label,url] of day.sources || []) link($('links'),label,url);
+ if (map) map.setDay(day);
+}
+class TripMap {
+ constructor(host) {
+  this.host=host;
+  this.canvas=add(host,'canvas');
+  this.canvas.setAttribute('aria-hidden','true');
+  this.markers=add(host,'div',null,'map-markers');
+  this.scale=1;
+  this.center=[0,0];
+  this.tiles=new Map();
+  this.drag=null;
+  const zoom=add(host,'div',null,'map-zoom');
+  for(const [label,factor] of [['+',2],['−',.5]]) {
+   const button=add(zoom,'button',label);
+   button.type='button'; button.setAttribute('aria-label',factor>1?'ซูมเข้า':'ซูมออก');
+   button.addEventListener('click',()=>this.zoom(factor));
+  }
+  link(add(host,'div',null,'attribution'),'© OpenStreetMap','https://www.openstreetmap.org/copyright');
+  host.tabIndex=0;
+  host.addEventListener('keydown',event=>{
+   if(event.target!==host) return;
+   const deltas={ArrowLeft:[-70,0],ArrowRight:[70,0],ArrowUp:[0,-70],ArrowDown:[0,70]};
+   if(event.key==='+' || event.key==='=') this.zoom(2);
+   else if(event.key==='-') this.zoom(.5);
+   else if(deltas[event.key]) this.pan(...deltas[event.key]);
+   else return;
+   event.preventDefault();
+  });
+  this.canvas.addEventListener('pointerdown',event=>{
+   if(event.button!==0 || this.drag) return;
+   this.drag={id:event.pointerId,x:event.clientX,y:event.clientY};
+   this.canvas.setPointerCapture(event.pointerId);
+  });
+  this.canvas.addEventListener('pointermove',event=>{
+   if(this.drag?.id!==event.pointerId) return;
+   this.pan(this.drag.x-event.clientX,this.drag.y-event.clientY);
+   this.drag={id:event.pointerId,x:event.clientX,y:event.clientY};
+  });
+  this.canvas.addEventListener('lostpointercapture',()=>{this.drag=null;});
+  new ResizeObserver(()=>this.fit()).observe(host);
+ }
+ project([lat,lng]) {
+  const rad=lat*Math.PI/180;
+  return [(lng+180)/360,(1-Math.asinh(Math.tan(rad))/Math.PI)/2];
+ }
+ setDay(day) {
+  this.day=day;
+  this.markers.replaceChildren();
+  const keys=[...new Set(day.steps.flatMap(keyList))];
+  this.positions=new Map(keys.map(key=>[key,this.project(points[key].coord)]));
+  this.segments=new Map();
+  for(const step of day.steps) {
+   const keys=keyList(step);
+   keys.slice(1).forEach((end,i)=>{
+    const start=keys[i];
+    const pair=[start,end].sort().join(':');
+    if(!this.segments.has(pair) || step[0]!==walk) this.segments.set(pair,{start,end,mode:step[0]});
+   });
+  }
+  this.pins=keys.map(key=>{
+   const point=points[key];
+   const marker=link(this.markers,point.icon,mapLink([key]));
+   marker.className='pin';
+   marker.style.setProperty('--pin',day.color);
+   marker.title=point.name+' · Google Maps';
+   marker.setAttribute('aria-label',marker.title);
+   add(marker,'span',point.name,day.focus.includes(key)?'pin-label principal':'pin-label');
+   return [key,marker];
+  });
+  this.fit();
+ }
+ fit() {
+  if(!this.positions) return;
+  const coords=[...this.positions.values()];
+  const xs=coords.map(p=>p[0]),ys=coords.map(p=>p[1]);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  this.center=[(x0+x1)/2,(y0+y1)/2];
+  this.scale=Math.min(256*2**14,(this.host.clientWidth-80)/(x1-x0),(this.host.clientHeight-90)/(y1-y0));
+  this.draw();
+ }
+ pan(dx,dy) {
+  this.center[0]=Math.max(0,Math.min(1,this.center[0]+dx/this.scale));
+  this.center[1]=Math.max(0,Math.min(1,this.center[1]+dy/this.scale));
+  this.draw();
+ }
+ zoom(factor) {
+  this.scale=Math.max(256*2**5,Math.min(256*2**18,this.scale*factor));
+  this.draw();
+ }
+ draw() {
+  if(!this.positions) return;
+  const w=this.host.clientWidth,h=this.host.clientHeight,dpr=Math.min(2,window.devicePixelRatio||1);
+  if(this.canvas.width!==Math.round(w*dpr) || this.canvas.height!==Math.round(h*dpr)) {
+   this.canvas.width=Math.round(w*dpr); this.canvas.height=Math.round(h*dpr);
+  }
+  const ctx=this.canvas.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  const x0=this.center[0]-w/2/this.scale,y0=this.center[1]-h/2/this.scale;
+  const screen=([x,y])=>[(x-x0)*this.scale,(y-y0)*this.scale];
+  ctx.clearRect(0,0,w,h);
+  const z=Math.max(0,Math.min(18,Math.round(Math.log2(this.scale/256))));
+  const count=2**z, size=this.scale/count;
+  for(let y=Math.max(0,Math.floor(y0*count));y<Math.min(count,Math.ceil((y0+h/this.scale)*count));y++) {
+   for(let x=Math.max(0,Math.floor(x0*count));x<Math.min(count,Math.ceil((x0+w/this.scale)*count));x++) {
+    const [sx,sy]=screen([x/count,y/count]);
+    const key=z+'/'+x+'/'+y;
+    let img=this.tiles.get(key);
+    if(!img) {
+     img=new Image();
+     img.onload=()=>this.draw();
+     img.src='https://tile.openstreetmap.org/'+key+'.png';
+     this.tiles.set(key,img);
+     if(this.tiles.size>256) this.tiles.delete(this.tiles.keys().next().value);
+    }
+    if(img.complete && img.naturalWidth) ctx.drawImage(img,sx,sy,size+.5,size+.5);
+    else {ctx.strokeStyle='#d5e0d3';ctx.strokeRect(sx,sy,size,size);}
+   }
+  }
+  ctx.lineCap='round';
+  for(const {start,end,mode} of this.segments.values()) {
+   ctx.beginPath();ctx.moveTo(...screen(this.positions.get(start))); ctx.lineTo(...screen(this.positions.get(end)));
+   ctx.setLineDash(mode===walk?[3,7]:[]);
+   ctx.lineWidth=mode==='Sagano Romantic Train'?9:7;ctx.strokeStyle='#fffdf8';ctx.stroke();
+   ctx.lineWidth-=3;ctx.strokeStyle=this.day.color;ctx.stroke();
+  }
+  ctx.font='600 11px system-ui, sans-serif';
+  const labelBoxes=[];
+  for(const [key,marker] of this.pins) {
+   const [x,y]=screen(this.positions.get(key));
+   marker.hidden=x<12 || y<12 || x>w-12 || y>h-12;
+   marker.style.left=x+'px';marker.style.top=y+'px';
+   if (this.day.focus.includes(key)) {
+    const label=marker.firstElementChild;
+    label.classList.remove('principal');
+    const half=ctx.measureText(points[key].name).width/2+9;
+    const box=[x-half,y-38,x+half,y-18];
+    const overlap=labelBoxes.some(b=>box[0]<b[2] && box[2]>b[0] && box[1]<b[3] && box[3]>b[1]);
+    if(!marker.hidden && !overlap && box[0]>=0 && box[2]<=w && box[1]>=0) {
+     label.classList.add('principal');
+     labelBoxes.push(box);
+    }
+   }
+  }
+ }
+}
+window.addEventListener('DOMContentLoaded',()=>{
+ controls=days.map((day,i)=>{
+  const label=add($('days'),'label',null,'day-choice');
+  label.style.setProperty('--day',day.color);
+  const input=add(label,'input');
+  Object.assign(input,{type:'radio',name:'day',value:String(i)});
+  input.addEventListener('change',()=>select(i));
+  const text=add(label,'span');
+  add(text,'i',null,'swatch').setAttribute('aria-hidden','true');
+  text.append(day.date+' พ.ย. · '+day.short);
+  return input;
+ });
+ $('map').replaceChildren();
+ map=new TripMap($('map'));
+ $('fit').disabled=false;
+ $('fit').addEventListener('click',()=>map.fit());
+ select(current);
+});
+</script>
+</body>
+</html>
