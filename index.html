@@ -13,6 +13,7 @@ main{width:min(1420px,100%);margin:auto;padding:24px clamp(16px,4vw,56px) 36px}.
 .basemap,.route-canvas,.map-markers{position:absolute;inset:0;width:100%;height:100%}#map{position:relative;overflow:hidden}.route-canvas{touch-action:none;cursor:grab}.route-canvas:active{cursor:grabbing}.map-markers{pointer-events:none}.pin{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;text-decoration:none;pointer-events:auto}.pin[hidden]{display:none}.pin:hover,.pin:focus-visible{z-index:2}.pin-label{display:none;position:absolute;bottom:29px;left:50%;transform:translateX(-50%);padding:2px 5px;border-radius:4px;background:#fffdf8;color:#202923;font:600 11px system-ui,sans-serif;white-space:nowrap;box-shadow:0 1px 4px #0003}.pin:hover .pin-label,.pin:focus-visible .pin-label,.pin .principal{display:block}.map-zoom{display:grid;position:absolute;left:10px;top:10px;gap:3px}.map-zoom button{width:44px;height:44px;border:1px solid #817e70;border-radius:6px;background:#fffdf8;font-size:1.3rem}.attribution{position:absolute;right:0;bottom:0;background:#fffdf8;padding:2px 5px;font-size:.72rem}
 .step-places{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;list-style:none;padding:0;margin:4px 0}.step-places li{display:inline-flex;align-items:baseline;gap:4px;border:0;padding:0;max-width:100%;overflow-wrap:anywhere}.step-places .place-icon,.step-places .place-arrow{flex:none}.step-places .place-arrow{color:var(--soft)}.landmark-section{margin:14px 0 20px}.landmark-section h3,.journey-title{font-size:1.05rem;margin:0 0 8px}.landmark-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0}.landmark-list li{min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fffdf8}.landmark-list p{color:var(--soft);margin-top:4px}.landmark-actions{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px}.landmark-actions button{border:0;background:transparent;padding:8px 0;color:#205d50;text-decoration:underline;text-underline-offset:3px;min-height:44px}.landmark-actions a{display:inline-flex;align-items:center;min-height:44px}.landmark-pin{border-width:3px;box-shadow:0 0 0 2px var(--pin),0 2px 7px #0006}.pin.pin-focused{z-index:3}.pin.pin-focused .pin-label{display:block}@media(max-width:600px){.landmark-list{grid-template-columns:1fr}}
 .journey-tables{display:grid;gap:18px;margin:8px 0 14px}.journey-table{width:100%;table-layout:fixed;border-collapse:collapse;border:1px solid var(--line)}.journey-table caption{text-align:left;font-weight:750;margin:0 0 6px;overflow-wrap:anywhere}.journey-table th,.journey-table td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.journey-table thead{background:#f2eee4}.journey-table th:first-child{width:28%}.journey-table td p{color:var(--soft);margin:4px 0}.journey-table .step-places{margin:0}.journey-table a{display:inline-block;padding:3px 0}.journey-table .travel-icon{margin-right:.25em}@media(max-width:600px){.journey-table th:first-child{width:29%}.journey-table th,.journey-table td{padding:7px}}
+.departure-time{display:block;color:var(--soft);font-variant-numeric:tabular-nums;margin-top:3px}.journey-note{color:var(--soft);margin-bottom:8px}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css">
 <script async src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js" id="maplibre"></script>
@@ -36,7 +37,7 @@ main{width:min(1420px,100%);margin:auto;padding:24px clamp(16px,4vw,56px) 36px}.
   </section>
   <section aria-labelledby="journey-title">
    <h3 class="journey-title" id="journey-title">วิธีเดินทาง</h3>
-   <div class="journey-tables" id="steps"></div>
+   <p class="journey-note" id="journey-note"></p><div class="journey-tables" id="steps"></div>
    <div class="links" id="links"></div>
   </section>
 </section>
@@ -74,39 +75,39 @@ const points = {
 const metro='Osaka Metro Yotsubashi Line'; const jrKyoto='JR Kyoto Line'; const jrNara='JR Nara Line'; const jrSagano='JR Sagano Line'; const airport='Nankai Airport Express'; const walk='เดิน'; const taxi='แท็กซี่'; const drive='รถเช่า';
 const days = [
  {date:19, week:'พฤหัสบดี', short:'คัตสึโอจิ', title:'คัตสึโอจิและน้ำตกมิโนะ', color:'#ad353c', focus:['katsuo','minoh'], steps:[
- ['เดิน','kix rental','ถึง KIX ตามแผน 07:20 แล้วไปรับรถ Toyota ประมาณ 10:00'],
- [drive,'rental katsuo minoh',["ขับไปวัดดารุมะ Katsuo-ji และเผื่อเวลาเที่ยวประมาณ 2 ชั่วโมง","ขับไปที่จอดรถของอุทยาน แล้วเดินต่อไปน้ำตก Minoh"]],
- [drive,'minoh base fuel toyota',["ขับกลับไปเช็กอินย่าน Hanazonominami","เติมน้ำมันก่อนคืนรถ เลือกปั๊มระหว่างทางตามสภาพจราจร","คืนรถที่ Toyota Namba Terminal ภายใน 20:00"]],
- [walk,'toyota namba','เดินไปสถานี Osaka Metro Namba'],
- [metro,'namba hana','ขึ้นขบวนไปทาง Suminoekoen แล้วลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']]},
+ ['เดิน','kix rental','ถึง KIX ตามแผน 07:20 แล้วไปรับรถ Toyota ประมาณ 10:00',"09:45"],
+ [drive,'rental katsuo minoh',["ขับไปวัดดารุมะ Katsuo-ji และเผื่อเวลาเที่ยวประมาณ 2 ชั่วโมง","ขับไปที่จอดรถของอุทยาน แล้วเดินต่อไปน้ำตก Minoh"],["10:15","13:30"]],
+ [drive,'minoh base fuel toyota',["ขับกลับไปเช็กอินย่าน Hanazonominami","เติมน้ำมันก่อนคืนรถ เลือกปั๊มระหว่างทางตามสภาพจราจร","คืนรถที่ Toyota Namba Terminal ภายใน 20:00"],["15:30","18:10","19:10"]],
+ [walk,'toyota namba','เดินไปสถานี Osaka Metro Namba',"20:00"],
+ [metro,'namba hana','ขึ้นขบวนไปทาง Suminoekoen แล้วลง Hanazonocho',"20:15"],[walk,'hana base','เดินกลับย่านที่พัก',"20:25"]]},
  {date:20, week:'ศุกร์', short:'โทฟุกุจิ · อุจิ', title:'โทฟุกุจิและอุจิ', color:'#9e540c', focus:['toft','byodo'], steps:[
- [walk,'base hana','ออกจากที่พักประมาณ 07:00'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','เดินตามป้าย JR Osaka Station'],
- [jrKyoto,'osaka kyoto','ขึ้นขบวนไป Kyoto แล้วออกไปจุดขึ้นแท็กซี่'],[taxi,'kyoto toft','ลงที่วัด Tofuku-ji'],[walk,'toft tof','เดินจากวัดไป JR Tofukuji'],
- [jrNara,'tof uji','ขึ้นขบวนทาง Uji / Nara ตรวจป้ายว่าจอด JR Uji'],[walk,'uji omote byodo',["เดินจาก JR Uji ไปถนนร้านชา Byodo-in Omotesando","เดินต่อจากถนนร้านชาเข้าวัด Byodo-in"]],
- [walk,'byodo uji','กลับไป JR Uji'],[jrNara,'uji kyoto','นั่งกลับ Kyoto Station'],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']],
+ [walk,'base hana','ออกจากที่พักประมาณ 07:00',"07:00"],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda',"07:10"],[walk,'umeda osaka','เดินตามป้าย JR Osaka Station',"07:25"],
+ [jrKyoto,'osaka kyoto','ขึ้นขบวนไป Kyoto แล้วออกไปจุดขึ้นแท็กซี่',"07:45"],[taxi,'kyoto toft','ลงที่วัด Tofuku-ji',"08:25"],[walk,'toft tof','เดินจากวัดไป JR Tofukuji',"10:45"],
+ [jrNara,'tof uji','ขึ้นขบวนทาง Uji / Nara ตรวจป้ายว่าจอด JR Uji',"11:05"],[walk,'uji omote byodo',["เดินจาก JR Uji ไปถนนร้านชา Byodo-in Omotesando","เดินต่อจากถนนร้านชาเข้าวัด Byodo-in"],["11:35","12:45"]],
+ [walk,'byodo uji','กลับไป JR Uji',"15:15"],[jrNara,'uji kyoto','นั่งกลับ Kyoto Station',"15:40"],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น',"17:30"],[walk,'osaka umeda','เดินไป Nishi-Umeda',"18:05"],[metro,'umeda hana','ลง Hanazonocho',"18:20"],[walk,'hana base','เดินกลับย่านที่พัก',"18:35"]],
  sources:[['Kyoto Travel','https://kyoto.travel/en/getting-around/getting-around-kyoto-by-subway-train/'],['Byodoin','https://www.byodoin.or.jp/en/guide/access/']]},
  {date:21, week:'เสาร์', short:'อาราชิยามะ', title:'อาราชิยามะและรถไฟซากาโนะ', color:'#356649', focus:['bridge','bamboo','tsaga','tkame'], steps:[
- [walk,'base hana','เดินไป Hanazonocho'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','ต่อไป JR Osaka'],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto'],
- [jrSagano,'kyoto saga','ลง JR Saga-Arashiyama'],[walk,'saga bridge arabica tenryu bamboo joja tsaga',["เดินจากสถานีไปสะพาน Togetsukyo","แวะร้านกาแฟริมแม่น้ำ","เดินต่อไปวัด Tenryu-ji","เดินต่อไปป่าไผ่","พักมื้อกลางวันก่อนเดินไปวัด Jojakko-ji","ย้อนกลับไปสถานี Torokko Saga เพื่อขึ้นรถไฟรอบ 15:02"]],
- ['Sagano Romantic Train','tsaga tarashi hozu tkame','ขึ้นที่ Torokko Saga เวลา 15:02 ตามแผน ลง Torokko Kameoka โดยสองสถานีกลางเป็นทางผ่าน'],
- [walk,'tkame uma','เดินไป JR Umahori'],[jrSagano,'uma kyoto','ขึ้นทาง Kyoto'],[jrKyoto,'kyoto osaka','กลับโอซาก้า'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']],
+ [walk,'base hana','เดินไป Hanazonocho',"07:15"],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda',"07:25"],[walk,'umeda osaka','ต่อไป JR Osaka',"07:40"],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto',"08:00"],
+ [jrSagano,'kyoto saga','ลง JR Saga-Arashiyama',"08:45"],[walk,'saga bridge arabica tenryu bamboo joja tsaga',["เดินจากสถานีไปสะพาน Togetsukyo","แวะร้านกาแฟริมแม่น้ำ","เดินต่อไปวัด Tenryu-ji","เดินต่อไปป่าไผ่","พักมื้อกลางวันก่อนเดินไปวัด Jojakko-ji","ย้อนกลับไปสถานี Torokko Saga เพื่อขึ้นรถไฟรอบ 15:02"],["09:10","09:30","10:00","10:55","12:40","14:10"]],
+ ['Sagano Romantic Train','tsaga tarashi hozu tkame','ขึ้นที่ Torokko Saga เวลา 15:02 ตามแผน ลง Torokko Kameoka โดยสองสถานีกลางเป็นทางผ่าน',"15:02"],
+ [walk,'tkame uma','เดินไป JR Umahori',"15:30"],[jrSagano,'uma kyoto','ขึ้นทาง Kyoto',"15:55"],[jrKyoto,'kyoto osaka','กลับโอซาก้า',"16:35"],[walk,'osaka umeda','เดินไป Nishi-Umeda',"17:10"],[metro,'umeda hana','ลง Hanazonocho',"17:25"],[walk,'hana base','เดินกลับย่านที่พัก',"17:40"]],
  sources:[['ตาราง Sagano Romantic Train','https://www.sagano-kanko.co.jp/en/train-info/']]},
  {date:22, week:'อาทิตย์', short:'เอคันโด · กิออน', title:'เอคันโด กิออน และคิโยมิซุเดระ', color:'#654b96', focus:['eikan','gion','kiyo'], steps:[
- [walk,'base hana','ออกจากที่พักประมาณ 07:00'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','เดินไป JR Osaka'],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto'],
- [taxi,'kyoto eikan','ไป Eikando เป็นจุดแรกสำหรับชมใบไม้แดง'],[taxi,'eikan ponto','ต่อแท็กซี่ลงใกล้ Pontocho'],[walk,'ponto gion sann kiyo',["เดินจาก Pontocho ข้ามไปย่าน Gion","เดินต่อขึ้นไปทาง Higashiyama และ Sannenzaka","ขึ้นทางลาดไปวัด Kiyomizu-dera เผื่อเวลาคนหนาแน่น"]],
- [taxi,'kiyo kyoto','เรียกแท็กซี่จากถนนใหญ่ลง Kyoto Station'],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']]},
+ [walk,'base hana','ออกจากที่พักประมาณ 07:00',"07:00"],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda',"07:10"],[walk,'umeda osaka','เดินไป JR Osaka',"07:25"],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto',"07:45"],
+ [taxi,'kyoto eikan','ไป Eikando เป็นจุดแรกสำหรับชมใบไม้แดง',"08:25"],[taxi,'eikan ponto','ต่อแท็กซี่ลงใกล้ Pontocho',"11:00"],[walk,'ponto gion sann kiyo',["เดินจาก Pontocho ข้ามไปย่าน Gion","เดินต่อขึ้นไปทาง Higashiyama และ Sannenzaka","ขึ้นทางลาดไปวัด Kiyomizu-dera เผื่อเวลาคนหนาแน่น"],["12:30","13:45","14:25"]],
+ [taxi,'kiyo kyoto','เรียกแท็กซี่จากถนนใหญ่ลง Kyoto Station',"17:30"],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น',"18:50"],[walk,'osaka umeda','เดินไป Nishi-Umeda',"19:25"],[metro,'umeda hana','ลง Hanazonocho',"19:40"],[walk,'hana base','เดินกลับย่านที่พัก',"19:55"]]},
  {date:23, week:'จันทร์', short:'USJ', title:'Universal Studios Japan เต็มวัน', color:'#22629d', focus:['nishi','uni','usj'], steps:[
- [walk,'base hana','เดินไป Hanazonocho'],[metro,'hana namba','ขึ้นทาง Nishi-Umeda แล้วลง Namba'],[walk,'namba osn','เดินตามป้าย Hanshin ไป Osaka-Namba'],
- ['Hanshin Namba Line','osn nishi','ขึ้นขบวนที่จอด Nishikujo'],['JR Yumesaki Line','nishi uni','เปลี่ยนไป JR Sakurajima Line หรือ Yumesaki Line ลง Universal City'],[walk,'uni citywalk usj',["เดินจากสถานี Universal City ไปยัง CityWalk","เดินต่อผ่าน CityWalk ไปทางเข้าสวนสนุก"]],
- [walk,'usj citywalk uni','ช่วงเย็นเดินผ่าน CityWalk กลับไปสถานี Universal City'],['JR Yumesaki Line','uni nishi','นั่งกลับไปเปลี่ยนสายที่ Nishikujo'],
- ['Hanshin Namba Line','nishi osn','ขึ้นขบวนไป Osaka-Namba'],[walk,'osn namba','เดินตามป้ายไป Osaka Metro Namba'],
- [metro,'namba hana','ขึ้นขบวนทาง Suminoekoen แล้วลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']],
+ [walk,'base hana','เดินไป Hanazonocho',"06:00"],[metro,'hana namba','ขึ้นทาง Nishi-Umeda แล้วลง Namba',"06:10"],[walk,'namba osn','เดินตามป้าย Hanshin ไป Osaka-Namba',"06:20"],
+ ['Hanshin Namba Line','osn nishi','ขึ้นขบวนที่จอด Nishikujo',"06:35"],['JR Yumesaki Line','nishi uni','เปลี่ยนไป JR Sakurajima Line หรือ Yumesaki Line ลง Universal City',"06:55"],[walk,'uni citywalk usj',["เดินจากสถานี Universal City ไปยัง CityWalk","เดินต่อผ่าน CityWalk ไปทางเข้าสวนสนุก"],["07:05","07:15"]],
+ [walk,'usj citywalk uni','ช่วงเย็นเดินผ่าน CityWalk กลับไปสถานี Universal City',"20:00"],['JR Yumesaki Line','uni nishi','นั่งกลับไปเปลี่ยนสายที่ Nishikujo',"20:20"],
+ ['Hanshin Namba Line','nishi osn','ขึ้นขบวนไป Osaka-Namba',"20:40"],[walk,'osn namba','เดินตามป้ายไป Osaka Metro Namba',"21:00"],
+ [metro,'namba hana','ขึ้นขบวนทาง Suminoekoen แล้วลง Hanazonocho',"21:15"],[walk,'hana base','เดินกลับย่านที่พัก',"21:25"]],
  sources:[['เส้นทางรถไฟของ USJ','https://www.usj.co.jp/web/en/us/access/train'],['Universal CityWalk Osaka','https://ucw.jp/global/en/']]},
  {date:24, week:'อังคาร', short:'ช้อปปิ้ง · KIX', title:'ช้อปปิ้งในนัมบะและเดินทางไป KIX', color:'#1b706c', focus:['doton','shinsa','kix'], steps:[
- [walk,'base hana','เดินไป Hanazonocho หลังจัดการสัมภาระตามแผน'],[metro,'hana namba','ลง Namba'],
- [walk,'namba doton shinsa namba',["เดินจากสถานี Namba ไป Dotonbori","เดินต่อไปช้อปปิ้งที่ Shinsaibashi ตามเวลาที่มี","กลับไป Osaka Metro Namba"]],
- [metro,'namba hana','ลง Hanazonocho เพื่อกลับไปรับสัมภาระ หากฝากไว้ที่ที่พัก'],[walk,'hana base tenga',["แวะรับสัมภาระ หากฝากไว้ที่ที่พัก","เดินจากย่านที่พักไปขึ้นรถไฟที่ Nankai Tengachaya"]],
- [airport,'tenga kix','เลือกขบวนที่ปลายทาง Kansai Airport เผื่อเวลาเช็กอินตามตั๋วและตรวจอาคารผู้โดยสารก่อนออกเดินทาง']]}
+ [walk,'base hana','เดินไป Hanazonocho หลังจัดการสัมภาระตามแผน',"07:45"],[metro,'hana namba','ลง Namba',"07:55"],
+ [walk,'namba doton shinsa namba',["เดินจากสถานี Namba ไป Dotonbori","เดินต่อไปช้อปปิ้งที่ Shinsaibashi ตามเวลาที่มี","กลับไป Osaka Metro Namba"],["08:10","08:45","09:25"]],
+ [metro,'namba hana','ลง Hanazonocho เพื่อกลับไปรับสัมภาระ หากฝากไว้ที่ที่พัก',"09:45"],[walk,'hana base tenga',["แวะรับสัมภาระ หากฝากไว้ที่ที่พัก","เดินจากย่านที่พักไปขึ้นรถไฟที่ Nankai Tengachaya"],["09:55","10:10"]],
+ [airport,'tenga kix','เลือกขบวนที่ปลายทาง Kansai Airport เผื่อเวลาเช็กอินตามตั๋วและตรวจอาคารผู้โดยสารก่อนออกเดินทาง',"10:30"]]}
 ];
 const landmarkDays = {
  19:[
@@ -196,12 +197,12 @@ function journeySections(day) {
  const checkpoints=new Set([...landmarkKeys(day),'base','rental','toyota','tkame']);
  const sections=[];
  let rows=[];
- for (const [mode,route,description] of day.steps) {
+ for (const [mode,route,description,departure] of day.steps) {
   const stops=route.split(' ');
   const split=Array.isArray(description);
   for (let i=0;i<(split?stops.length-1:1);i++) {
    const keys=split?stops.slice(i,i+2):stops;
-   rows.push({mode,keys,description:split?description[i]:description});
+   rows.push({mode,keys,description:split?description[i]:description,departure:split?departure[i]:departure});
    if (checkpoints.has(keys.at(-1))) {
     sections.push(rows);
     rows=[];
@@ -213,6 +214,12 @@ function journeySections(day) {
 }
 
 function renderJourney(day) {
+ const note='เวลาออกโดยประมาณตามเวลาญี่ปุ่น ตรวจรอบรถจริงก่อนเดินทาง';
+ const dayNotes={
+  21:'รอบ Sagano 15:02 ตามแผนทริป',
+  24:'แผนวันนี้อิงไฟลต์ 14:00 และเผื่อไปถึง KIX ประมาณ 11:15 ปรับตามตั๋วจริงและเวลาเปิดร้าน'
+ };
+ $('journey-note').textContent=dayNotes[day.date]?note+' · '+dayNotes[day.date]:note;
  const host=$('steps');
  host.replaceChildren();
  for (const rows of journeySections(day)) {
@@ -225,11 +232,13 @@ function renderJourney(day) {
    add(header,'th',label).scope='col';
   }
   const body=add(table,'tbody');
-  for (const {mode,keys,description} of rows) {
+  for (const {mode,keys,description,departure} of rows) {
    const row=add(body,'tr');
    const travel=add(row,'td');
    add(travel,'span',mode===walk?'🚶':mode===taxi?'🚕':mode===drive?'🚗':'🚉','travel-icon').setAttribute('aria-hidden','true');
    add(travel,'strong',mode);
+   const time=add(travel,'time','('+departure+')','departure-time');
+   time.dateTime=departure;
    const details=add(row,'td');
    const places=add(details,'ol',null,'step-places');
    places.setAttribute('aria-label','จุดตามลำดับการเดินทาง');
