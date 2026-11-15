@@ -11,6 +11,7 @@
 main{width:min(1420px,100%);margin:auto;padding:24px clamp(16px,4vw,56px) 36px}.header{display:flex;justify-content:space-between;align-items:end;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--line)}h1,h2,p{margin:0}h1{font:700 clamp(2rem,5.5vw,4.7rem)/1 Georgia,serif;letter-spacing:-.045em}h2{font-size:1.35rem;line-height:1.3}.eyebrow{color:#914434;font-weight:750;letter-spacing:.09em;margin-bottom:9px}.header p:last-child{color:var(--soft);margin-top:9px}.header time{font-weight:700;white-space:nowrap}.layout{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:18px;margin-top:20px}.map-panel,.legend,.guide{background:#fffdf8;border:1px solid var(--line);border-radius:16px}.map-panel{overflow:hidden;min-width:0}.map-head{padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:space-between}.map-head button{background:#fffdf8;border:1px solid var(--line);border-radius:8px;padding:7px 10px;min-height:44px}.map-head button:disabled{cursor:default;color:#626862}#map{height:clamp(390px,59vh,660px);background:#e3ecdf;isolation:isolate}.map-error{padding:24px;max-width:420px}.caption{padding:9px 14px;font-size:.87rem;color:var(--soft)}.legend{padding:15px;align-self:start}.legend h2{margin-bottom:10px}fieldset{padding:0;border:0;margin:0;min-width:0}.day-choice{position:relative;display:block;margin:4px 0}.day-choice input{position:absolute;opacity:0;inset:0;margin:0;width:100%;height:100%;cursor:pointer}.day-choice span{display:flex;gap:10px;align-items:center;min-height:48px;border:1px solid transparent;border-radius:8px;padding:7px 9px}.day-choice input:checked+span{background:#f2eee4;border-color:#b4aa95;font-weight:750}.day-choice input:focus-visible+span{outline:3px solid #186c99}.swatch{width:12px;height:12px;flex:0 0 12px;background:var(--day);border-radius:50%}.key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.87rem}.dash{border-bottom:2px dashed #4d5b53;width:18px;display:inline-block;margin:0 4px 4px}.guide{margin-top:18px;padding:clamp(15px,3vw,25px);border-top:4px solid var(--accent)}.steps{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:1px}.steps li{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:10px;border-top:1px solid #e9e4d8;padding:12px 0}.step-icon{width:2rem;height:2rem;background:#f2eee4;border-radius:50%;display:grid;place-items:center}.steps p{color:var(--soft);margin-top:2px}.steps a{display:inline-block;margin-top:5px}.links{border-top:1px solid var(--line);padding-top:10px;font-size:.9rem}.links a{display:inline-block;margin:4px 14px 0 0}.pin{background:var(--pin);border:2px solid white;border-radius:50%;display:grid;place-items:center;box-shadow:0 1px 5px #0007;font-size:15px}
 @media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr);gap:10px}.legend{grid-row:1}.legend h2{font-size:1.05rem;margin-bottom:3px}fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 4px}.day-choice{margin:1px 0}.day-choice span{font-size:.84rem;padding-inline:6px;gap:6px}.key{margin-top:7px;padding-top:7px}#map{height:clamp(335px,54svh,535px)}.header{display:block}.header time{display:block;margin-top:8px}}
 .basemap,.route-canvas,.map-markers{position:absolute;inset:0;width:100%;height:100%}#map{position:relative;overflow:hidden}.route-canvas{touch-action:none;cursor:grab}.route-canvas:active{cursor:grabbing}.map-markers{pointer-events:none}.pin{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;text-decoration:none;pointer-events:auto}.pin[hidden]{display:none}.pin:hover,.pin:focus-visible{z-index:2}.pin-label{display:none;position:absolute;bottom:29px;left:50%;transform:translateX(-50%);padding:2px 5px;border-radius:4px;background:#fffdf8;color:#202923;font:600 11px system-ui,sans-serif;white-space:nowrap;box-shadow:0 1px 4px #0003}.pin:hover .pin-label,.pin:focus-visible .pin-label,.pin .principal{display:block}.map-zoom{display:grid;position:absolute;left:10px;top:10px;gap:3px}.map-zoom button{width:44px;height:44px;border:1px solid #817e70;border-radius:6px;background:#fffdf8;font-size:1.3rem}.attribution{position:absolute;right:0;bottom:0;background:#fffdf8;padding:2px 5px;font-size:.72rem}
+.landmark-section{margin:14px 0 20px}.landmark-section h3,.journey-title{font-size:1.05rem;margin:0 0 8px}.landmark-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0}.landmark-list li{min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fffdf8}.landmark-list p{color:var(--soft);margin-top:4px}.landmark-actions{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px}.landmark-actions button{border:0;background:transparent;padding:8px 0;color:#205d50;text-decoration:underline;text-underline-offset:3px;min-height:44px}.landmark-actions a{display:inline-flex;align-items:center;min-height:44px}.landmark-pin{border-width:3px;box-shadow:0 0 0 2px var(--pin),0 2px 7px #0006}.pin.pin-focused{z-index:3}.pin.pin-focused .pin-label{display:block}@media(max-width:600px){.landmark-list{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css">
 <script async src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js" id="maplibre"></script>
@@ -26,12 +27,16 @@ main{width:min(1420px,100%);margin:auto;padding:24px clamp(16px,4vw,56px) 36px}.
 </section>
 <aside class="legend" aria-labelledby="legend-title"><h2 id="legend-title">เลือกวันเดินทาง</h2><fieldset id="days" aria-label="วันเดินทาง"></fieldset><div class="key"><span>🚉 สถานี</span><span>⛩️ วัด</span><span>🏠 ย่านที่พัก</span><span>🎢 สวนสนุก</span><span>⛽ เติมน้ำมัน</span><span><i class="dash"></i>เดิน</span></div></aside>
 </div>
-<section class="guide" aria-labelledby="guide-title"><h2 id="guide-title" aria-live="polite"></h2><ol class="steps" id="steps"></ol><div class="links" id="links"></div></section>
+<section class="guide" aria-labelledby="guide-title"><h2 id="guide-title" aria-live="polite"></h2><section class="landmark-section" aria-labelledby="landmark-title"><h3 id="landmark-title">จุดเที่ยววันนี้</h3><ol class="landmark-list" id="landmarks"></ol></section><h3 class="journey-title">วิธีเดินทาง</h3><ol class="steps" id="steps"></ol><div class="links" id="links"></div></section>
 <noscript>โปรดเปิด JavaScript เพื่อเลือกวันเดินทางและดูแผนที่</noscript>
 </main>
 <script>
 const pin = (name, lat, lng, icon = '🚉', query = name) => ({name, coord:[lat,lng], icon, query});
 const points = {
+ omote:pin('Byodo-in Omotesando',34.89170,135.80601,'🍵','Byodo-in Omotesando Uji'),
+ sann:pin('Sannenzaka',34.99666,135.78101,'📍','Sannenzaka Kyoto'),
+ citywalk:pin('Universal CityWalk Osaka',34.6680,135.4372,'🛍️'),
+ daimaru:pin('Daimaru Shinsaibashi',34.67314,135.50086,'🛍️'),
  base:pin('Hanazonominami neighborhood',34.6415,135.4982,'🏠','Hanazonominami Nishinari Osaka'),
  hana:pin('Hanazonocho',34.6439,135.4966), tenga:pin('Tengachaya',34.6367,135.4969),
  namba:pin('Namba · Yotsubashi',34.6665,135.4965,'🚉','Namba Station Osaka Metro Yotsubashi'),
@@ -65,9 +70,9 @@ const days = [
  {date:20, week:'ศุกร์', short:'โทฟุกุจิ · อุจิ', title:'โทฟุกุจิและอุจิ', color:'#9e540c', focus:['toft','byodo'], steps:[
  [walk,'base hana','ออกจากที่พักประมาณ 07:00'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','เดินตามป้าย JR Osaka Station'],
  [jrKyoto,'osaka kyoto','ขึ้นขบวนไป Kyoto แล้วออกไปจุดขึ้นแท็กซี่'],[taxi,'kyoto toft','ลงที่วัด Tofuku-ji'],[walk,'toft tof','เดินจากวัดไป JR Tofukuji'],
- [jrNara,'tof uji','ขึ้นขบวนทาง Uji / Nara ตรวจป้ายว่าจอด JR Uji'],[walk,'uji byodo','เดินจาก JR Uji ไปวัด Byodo-in และถนนร้านชา'],
+ [jrNara,'tof uji','ขึ้นขบวนทาง Uji / Nara ตรวจป้ายว่าจอด JR Uji'],[walk,'uji omote byodo','เดินจาก JR Uji ผ่านถนนร้านชา Byodo-in Omotesando แล้วเข้าวัด Byodo-in'],
  [walk,'byodo uji','กลับไป JR Uji'],[jrNara,'uji kyoto','นั่งกลับ Kyoto Station'],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']],
- sources:[['Kyoto Travel','https://kyoto.travel/en/getting-around/getting-around-kyoto-by-subway-train/']]},
+ sources:[['Kyoto Travel','https://kyoto.travel/en/getting-around/getting-around-kyoto-by-subway-train/'],['Byodoin','https://www.byodoin.or.jp/en/guide/access/']]},
  {date:21, week:'เสาร์', short:'อาราชิยามะ', title:'อาราชิยามะและรถไฟซากาโนะ', color:'#356649', focus:['bridge','bamboo','tsaga','tkame'], steps:[
  [walk,'base hana','เดินไป Hanazonocho'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','ต่อไป JR Osaka'],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto'],
  [jrSagano,'kyoto saga','ลง JR Saga-Arashiyama'],[walk,'saga bridge arabica tenryu bamboo joja tsaga','เที่ยวสะพาน Togetsukyo → % Arabica → Tenryu-ji → ป่าไผ่ แวะมื้อกลางวัน แล้วไป Jojakko-ji ก่อนกลับมาขึ้นรถไฟที่ Torokko Saga'],
@@ -76,18 +81,54 @@ const days = [
  sources:[['ตาราง Sagano Romantic Train','https://www.sagano-kanko.co.jp/en/train-info/']]},
  {date:22, week:'อาทิตย์', short:'เอคันโด · กิออน', title:'เอคันโด กิออน และคิโยมิซุเดระ', color:'#654b96', focus:['eikan','gion','kiyo'], steps:[
  [walk,'base hana','ออกจากที่พักประมาณ 07:00'],[metro,'hana umeda','ขึ้นทาง Nishi-Umeda'],[walk,'umeda osaka','เดินไป JR Osaka'],[jrKyoto,'osaka kyoto','นั่งไป JR Kyoto'],
- [taxi,'kyoto eikan','ไป Eikando เป็นจุดแรกสำหรับชมใบไม้แดง'],[taxi,'eikan ponto','ต่อแท็กซี่ลงใกล้ Pontocho'],[walk,'ponto gion kiyo','เดินเที่ยว Pontocho และ Gion แล้วขึ้นไป Kiyomizu-dera ทางย่าน Higashiyama เผื่อเวลาทางลาดและคนหนาแน่น'],
+ [taxi,'kyoto eikan','ไป Eikando เป็นจุดแรกสำหรับชมใบไม้แดง'],[taxi,'eikan ponto','ต่อแท็กซี่ลงใกล้ Pontocho'],[walk,'ponto gion sann kiyo','เดินเที่ยว Pontocho และ Gion แล้วขึ้นไป Kiyomizu-dera ผ่าน Sannenzaka เผื่อเวลาทางลาดและคนหนาแน่น'],
  [taxi,'kiyo kyoto','เรียกแท็กซี่จากถนนใหญ่ลง Kyoto Station'],[jrKyoto,'kyoto osaka','กลับโอซาก้าช่วงเย็น'],[walk,'osaka umeda','เดินไป Nishi-Umeda'],[metro,'umeda hana','ลง Hanazonocho'],[walk,'hana base','เดินกลับย่านที่พัก']]},
  {date:23, week:'จันทร์', short:'USJ', title:'Universal Studios Japan เต็มวัน', color:'#22629d', focus:['nishi','uni','usj'], steps:[
  [walk,'base hana','เดินไป Hanazonocho'],[metro,'hana namba','ขึ้นทาง Nishi-Umeda แล้วลง Namba'],[walk,'namba osn','เดินตามป้าย Hanshin ไป Osaka-Namba'],
- ['Hanshin Namba Line','osn nishi','ขึ้นขบวนที่จอด Nishikujo'],['JR Yumesaki Line','nishi uni','เปลี่ยนไป JR Sakurajima Line หรือ Yumesaki Line ลง Universal City'],[walk,'uni usj','เดินผ่าน Universal CityWalk ไปทางเข้าสวนสนุก ช่วงเย็นกลับทางเดิม']],
- sources:[['เส้นทางรถไฟของ USJ','https://www.usj.co.jp/web/en/us/access/train']]},
+ ['Hanshin Namba Line','osn nishi','ขึ้นขบวนที่จอด Nishikujo'],['JR Yumesaki Line','nishi uni','เปลี่ยนไป JR Sakurajima Line หรือ Yumesaki Line ลง Universal City'],[walk,'uni citywalk usj','เดินผ่าน Universal CityWalk ไปทางเข้าสวนสนุก ช่วงเย็นกลับทางเดิม']],
+ sources:[['เส้นทางรถไฟของ USJ','https://www.usj.co.jp/web/en/us/access/train'],['Universal CityWalk Osaka','https://ucw.jp/global/en/']]},
  {date:24, week:'อังคาร', short:'ช้อปปิ้ง · KIX', title:'ช้อปปิ้งในนัมบะและเดินทางไป KIX', color:'#1b706c', focus:['doton','shinsa','kix'], steps:[
  [walk,'base hana','เดินไป Hanazonocho หลังจัดการสัมภาระตามแผน'],[metro,'hana namba','ลง Namba'],
  [walk,'namba doton shinsa namba','เที่ยว Dotonbori และ Shinsaibashi ตามเวลาที่มี แล้วกลับไป Osaka Metro Namba'],
  [metro,'namba hana','ลง Hanazonocho เพื่อกลับไปรับสัมภาระ หากฝากไว้ที่ที่พัก'],[walk,'hana base tenga','รับสัมภาระแล้วเดินไป Nankai Tengachaya'],
  [airport,'tenga kix','เลือกขบวนที่ปลายทาง Kansai Airport เผื่อเวลาเช็กอินตามตั๋วและตรวจอาคารผู้โดยสารก่อนออกเดินทาง']]}
 ];
+const landmarkDays = {
+ 19:[
+  ['katsuo','วัดดารุมะบนเขามิโนะ แวะเป็นจุดแรกหลังรับรถเช่า และเผื่อเวลาเที่ยวประมาณ 2 ชั่วโมง'],
+  ['minoh','น้ำตกและจุดชมธรรมชาติในอุทยานมิโนะ จากที่จอดรถต้องเดินต่อไปถึงน้ำตก']
+ ],
+ 20:[
+  ['toft','วัดชมใบไม้แดงช่วงเช้า จุดที่น่าแวะคือสะพาน Tsutenkyo แล้วเดินต่อไป JR Tofukuji'],
+  ['omote','ถนนร้านชาในอุจิก่อนถึงวัด แวะซื้อชาเขียวหรือขนมมัทฉะตามเวลาที่มี'],
+  ['byodo','วัดมรดกโลกในอุจิ จุดหลักคือ Phoenix Hall และสวนรอบสระ']
+ ],
+ 21:[
+  ['bridge','สะพานข้ามแม่น้ำคัตสึระ จุดเริ่มเดินเที่ยวอาราชิยามะ'],
+  ['arabica','ร้านกาแฟริมแม่น้ำใกล้สะพาน Togetsukyo แวะก่อนเดินต่อไปวัด'],
+  ['tenryu','วัดเซนที่มีสวนและสระน้ำ อยู่ในเส้นทางเดินจากริมแม่น้ำไปป่าไผ่'],
+  ['bamboo','ทางเดินป่าไผ่ใกล้ Tenryu-ji จากนั้นพักมื้อกลางวันตามแผน'],
+  ['joja','วัดบนเนินสำหรับชมใบไม้แดง เดินต่อก่อนย้อนกลับไปสถานี Torokko Saga'],
+  ['tsaga','สถานีต้นทางของ Sagano Romantic Train รอบ 15:02 ไป Torokko Kameoka']
+ ],
+ 22:[
+  ['eikan','จุดชมใบไม้แดงหลักของวันนี้ ไปเป็นจุดแรกตามแผน'],
+  ['ponto','ตรอกร้านอาหารใกล้แม่น้ำคาโมะ แวะก่อนข้ามไปฝั่งกิออน'],
+  ['gion','เดินชมย่านกิออนและถนน Hanamikoji ก่อนขึ้นไป Higashiyama'],
+  ['sann','ถนนหินและบันไดในย่าน Higashiyama อยู่บนทางเดินขึ้นไปวัดน้ำใส'],
+  ['kiyo','วัดน้ำใส จุดสุดท้ายของวัน แวะชมระเบียงไม้มองออกไปทางเมืองเกียวโต']
+ ],
+ 23:[
+  ['citywalk','ทางผ่านจากสถานี Universal City ไปสวนสนุก มีร้านอาหารและของฝาก'],
+  ['usj','เที่ยวสวนสนุกเต็มวัน ขากลับเดินกลับสถานี Universal City เพื่อต่อรถที่ Nishikujo']
+ ],
+ 24:[
+  ['doton','ย่านริมคลองนัมบะและป้ายกูลิโกะ เหมาะกับการแวะถ่ายรูปช่วงเช้า'],
+  ['shinsa','ถนนช้อปปิ้งในร่ม เดินต่อจาก Dotonbori ได้'],
+  ['daimaru','ตัวเลือกแวะซื้อเครื่องสำอางและสินค้าแบรนด์เนมในย่าน Shinsaibashi หากมีเวลาก่อนเดินทางไปสนามบิน']
+ ]
+};
+const landmarkKeys = day => landmarkDays[day.date].map(([key])=>key);
 const $ = id => document.getElementById(id);
 const add = (parent, tag, label, cls) => {
  const node = document.createElement(tag);
@@ -137,6 +178,21 @@ function select(index) {
  controls[index].checked=true;
  document.documentElement.style.setProperty('--accent',day.color);
  $('guide-title').textContent=day.week+' '+day.date+' พ.ย. · '+day.title;
+ $('landmarks').replaceChildren();
+ for (const [key,description] of landmarkDays[day.date]) {
+  const point=points[key];
+  const item=add($('landmarks'),'li');
+  const icon=add(item,'span',point.icon+' ');
+  icon.setAttribute('aria-hidden','true');
+  add(item,'strong',point.name);
+  add(item,'p',description);
+  const actions=add(item,'div',null,'landmark-actions');
+  const show=add(actions,'button','ดูบนแผนที่');
+  show.type='button';
+  show.setAttribute('aria-label','ดู '+point.name+' บนแผนที่');
+  show.addEventListener('click',()=>map.showLandmark(key));
+  link(actions,'Google Maps ↗',mapLink([key]));
+ }
  $('steps').replaceChildren();
  day.steps.forEach(step=>{
   const [mode,,description]=step;
@@ -260,7 +316,8 @@ class TripMap {
  setDay(day) {
   this.day=day;
   this.markers.replaceChildren();
-  const keys=[...new Set(day.steps.flatMap(keyList))];
+  const featured=new Set(landmarkKeys(day));
+  const keys=[...new Set([...day.steps.flatMap(keyList),...featured])];
   this.positions=new Map(keys.map(key=>[key,this.project(points[key].coord)]));
   this.segments=new Map();
   for(const step of day.steps) {
@@ -274,17 +331,29 @@ class TripMap {
   this.pins=keys.map(key=>{
    const point=points[key];
    const marker=link(this.markers,point.icon,mapLink([key]));
-   marker.className='pin';
+   marker.className=featured.has(key)?'pin landmark-pin':'pin';
    marker.style.setProperty('--pin',day.color);
    marker.title=point.name+' · Google Maps';
    marker.setAttribute('aria-label',marker.title);
-   add(marker,'span',point.name,day.focus.includes(key)?'pin-label principal':'pin-label');
+   add(marker,'span',point.name,(day.focus.includes(key)||featured.has(key))?'pin-label principal':'pin-label');
    return [key,marker];
   });
   this.fit();
  }
+ showLandmark(key) {
+  const marker=this.pins.find(([id])=>id===key)?.[1];
+  if (!marker) return;
+  for (const [,pin] of this.pins) pin.classList.remove('pin-focused');
+  marker.classList.add('pin-focused');
+  this.center=[...this.positions.get(key)];
+  this.scale=256*2**15;
+  this.draw();
+  this.host.scrollIntoView({block:'nearest'});
+  marker.focus({preventScroll:true});
+ }
  fit() {
   if(!this.positions) return;
+  for (const [,pin] of this.pins) pin.classList.remove('pin-focused');
   const coords=[...this.positions.values()];
   const xs=coords.map(p=>p[0]),ys=coords.map(p=>p[1]);
   const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
@@ -326,7 +395,7 @@ class TripMap {
    const [x,y]=screen(this.positions.get(key));
    marker.hidden=x<12 || y<12 || x>w-12 || y>h-12;
    marker.style.left=x+'px';marker.style.top=y+'px';
-   if (this.day.focus.includes(key)) {
+   if (this.day.focus.includes(key) || marker.classList.contains('landmark-pin')) {
     const label=marker.firstElementChild;
     label.classList.remove('principal');
     const half=ctx.measureText(points[key].name).width/2+9;
